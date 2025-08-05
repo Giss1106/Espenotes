@@ -1,29 +1,41 @@
-// Declaración de variables globales
-let MAIN;
-let MODAL_POST;
-let BTN_SHOW_POST;
-let BTN_CANCEL_POST;
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("#modal-post-section form");
+  const btnPostSubmit = document.getElementById("btn-post-submit");
+  const btnPostCancel = document.getElementById("btn-post-cancel");
+  const modal = document.getElementById("modal-post-section");
 
-// Funciones
-const showPostModal = () => {
-  MAIN.style.display = "none"; // Oculta el contenido principal
-  MODAL_POST.style.display = "block"; // Muestra el modal
-  setTimeout(() => {
-    MODAL_POST.style.transform = "translateY(0)"; // Animación para mostrar el modal
-  }, 1);
-};
+  // Mostrar modal
+  document.getElementById("btn-upload-post").addEventListener("click", () => {
+    modal.style.display = "block";
+    modal.style.transform = "translateY(0)";
+  });
 
-const closePostModal = () => {
-  MAIN.style.display = "block";
-  MODAL_POST.style.transform = "translateY(100vh)"; // Oculta el modal con animación
-};
+  // Cancelar y ocultar modal
+  btnPostCancel.addEventListener("click", () => {
+    modal.style.display = "none";
+    modal.style.transform = "translateY(100%)";
+  });
 
-// Cuando se carga el DOM
-window.addEventListener("load", () => {
-  MAIN = document.querySelector("#main");
-  MODAL_POST = document.querySelector("#modal-post-section");
-  BTN_SHOW_POST = document.querySelector("#btn-upload-post");
-  BTN_SHOW_POST.addEventListener("click", showPostModal); // Asigna el evento al botón de mostrar post
-  BTN_CANCEL_POST = document.querySelector("#btn-post-cancel");
-  BTN_CANCEL_POST.addEventListener("click", closePostModal); // Asigna el evento al botón de cerrar post
+  // Manejar envío del post
+  form.addEventListener("submit", (e) => {
+    e.preventDefault(); // evita que recargue la página
+
+    const title = document.getElementById("title").value.trim();
+    const description = document.getElementById("description").value.trim();
+
+    if (title === "" || description === "") {
+      alert("Por favor completa todos los campos.");
+      return;
+    }
+
+    // Aquí podrías mostrar el post en la pantalla, guardarlo, etc.
+    console.log("Nuevo post:", { title, description });
+
+    // Limpiar campos
+    form.reset();
+
+    // Ocultar modal
+    modal.style.display = "none";
+    modal.style.transform = "translateY(100%)";
+  });
 });

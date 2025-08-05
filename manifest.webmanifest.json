@@ -1,0 +1,15 @@
+{
+    "short_name": "ESPENotes",
+    "name": "ESPENotes SD",
+    "description": "Aplicacion que permite tomar notas de forma sencilla y rapida",
+    "background_color": "#1a4d80",
+    "theme_color": "#1a4d80",
+    "orientation": "portrait",
+    "display": "standalone",
+    "scope": ".",
+    "icons":[
+        {
+           "src": "src/icons/1", 
+    }]
+
+}
